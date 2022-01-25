@@ -4,7 +4,11 @@
   "main": "index.js",
   "author": "andrehideki <andre.hkiw@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "jest": "^27.4.7"
   },
   "dependencies": {
