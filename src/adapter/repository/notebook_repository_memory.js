@@ -1,10 +1,10 @@
 const notebookRepository = require("../../domain/repository/notebook_repository");
 let notebooks = [];
 
-function get({id}) {
+function get(id) {
   return notebooks.find(notebook => notebook.id === id);
 }
-function update({notebook}) {
+function update(notebook) {
   const oldNotebook = get({id:notebook.id});
   if(!oldNotebook) return;
   notebooks = notebooks.map(nb => {
@@ -13,11 +13,11 @@ function update({notebook}) {
   });
 }
 
-function remove({id}) {
+function remove(id) {
   notebooks = notebooks.filter(notebook => id !== notebook.id);
 }
 
-function save({notebook}) {
+function save(notebook) {
   notebooks.push(notebook);
 }
 
