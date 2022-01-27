@@ -6,10 +6,10 @@ const notebookRepository = {
     remove
   }) => {
     return {
-      save: ({notebook}) => save({notebook}),
-      update: ({notebook}) => update({notebook}),
-      get: ({id}) => get({id}),
-      remove: ({id}) => remove({id})
+      save: (notebook) => save(notebook),
+      update: (notebook) => update(notebook),
+      get: (id) => get(id),
+      remove: (id) => remove(id)
     }
   }
 }

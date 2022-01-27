@@ -1,16 +1,18 @@
+const Notebook = require("../entity/notebook");
+
 const addNotebookUseCase = {
   create: ({ IdGenerator, Err, NotebookRepository }) => {
     if (!Err) Err = Error;
     if (!IdGenerator) throw new Err("An Id generator function should be specified");
     return function ({ id, title, description, user } = {}) {
-      if (!id) id = IdGenerator(id);
-      if (!title) throw new Err("A title should be specified");
-      if (!user) throw new Err("An user should be specified");
+      const notebook = new Notebook({id: IdGenerator(), title, description, user});
+      NotebookRepository.save(notebook);
       return {
-        id,
-        title,
-        description,
-        user,
+        id: notebook.id,
+        title: notebook.title,
+        description: notebook.description,
+        user: notebook.user,
+        createAt: notebook.createAt
       };
     };
   },

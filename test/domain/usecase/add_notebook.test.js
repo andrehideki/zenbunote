@@ -1,9 +1,11 @@
 const crypto = require('crypto');
+const notebookRepositoryMemory = require('../../../src/adapter/repository/notebook_repository_memory');
 const addNotebookUseCase = require('../../../src/domain/usecase/add_notebook')
 
 const addNotebook = addNotebookUseCase.create({
   IdGenerator: () => crypto.randomUUID(),
-  Err: Error
+  Err: Error,
+  NotebookRepository: notebookRepositoryMemory
 });
 
 describe('When Adding an notebook to system', () => {
@@ -34,4 +36,20 @@ describe('When Adding an notebook to system', () => {
     });
     expect(notebook).toThrow(Error("An user should be specified"));
   })
+
+  it('It should save if all parameters are correct', () => {
+    const notebook = addNotebook({
+      title: "title",
+      description: "",
+      user: 'fulano'
+    });
+    expect(notebook.createAt).toBeInstanceOf(Date);
+    expect(notebook.id).not.toBeNull();
+    const savedNotebook = notebookRepositoryMemory.get(notebook.id);    
+    expect(savedNotebook.id).not.toBeNull();
+    expect(notebook.createAt).toBe(savedNotebook.createAt);
+  })
+
+
+
 });
