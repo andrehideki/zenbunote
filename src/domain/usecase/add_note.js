@@ -1,13 +1,16 @@
 const DependencyError = require('../errors/DependencyError');
+const { UsecaseInputError } = require('../errors/UsecaseError');
 const Note = require('../../../src/domain/entity/note');
 
 const add_note_usecase = {
   
-  create: ({ IdGenerator, NotebookRepository }) => {
+  create: ({ IdGenerator, NotebookRepository, NoteRepository }) => {
     if (!IdGenerator) throw new DependencyError('IdGenerator');
     if (!NotebookRepository) throw new DependencyError('NotebookRepository');
+    if (!NoteRepository) throw new DependencyError('NoteRepository');
     this.IdGenerator = IdGenerator;
     this.NotebookRepository = NotebookRepository;
+    this.NoteRepository = NoteRepository;
     return add_note_usecase.execute;
   },
 

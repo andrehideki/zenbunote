@@ -12,8 +12,17 @@ describe('When Adding a note to system', () => {
     const note = addNote({
       title: "title",
       content: "content",
-      user: 'fulano'
+      notebook_id: '123',
     });
     expect(note.id).not.toBeNull();
+  });
+
+  it('It should throw an error if title is empty', () => {
+    expect(() => addNote({
+      title: '',
+      content: "content",
+      notebook_id: '123',
+    }))
+    .toThrow(Error('A title should be specified'));
   });
 });
