@@ -9,13 +9,11 @@ const addNote = addNoteUseCase.create({
 
 describe('When Adding a note to system', () => {
   it('It should be successfully when all parameters are ok', () => {
-    console.log(addNote)
     const note = addNote({
       title: "title",
       content: "content",
       user: 'fulano'
     });
     expect(note.id).not.toBeNull();
-  })
-
+  });
 });
