@@ -1,4 +1,4 @@
-const noteRepository = require("../../domain/repository/note_repository");
+const { noteRepository } = require("../../domain/repository/note_repository");
 let notes = [];
 
 function get(id) {

@@ -13,3 +13,5 @@ const noteRepository = {
      }
    }
 }
+
+module.exports = { noteRepository };

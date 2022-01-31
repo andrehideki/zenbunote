@@ -3,7 +3,7 @@ const notebookRepositoryMemory = require('../../../src/adapter/repository/notebo
 const addNotebookUseCase = require('../../../src/domain/usecase/add_notebook')
 
 const addNotebook = addNotebookUseCase.create({
-  IdGenerator: () => crypto.randomUUID(),
+  IdGenerator: () => crypto.randomBytes(20).toString('hex'),
   Err: Error,
   NotebookRepository: notebookRepositoryMemory
 });

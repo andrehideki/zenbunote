@@ -1,3 +1,4 @@
+const Notebook = require("../../domain/entity/notebook");
 const notebookRepository = require("../../domain/repository/notebook_repository");
 let notebooks = [];
 
@@ -18,7 +19,9 @@ function remove(id) {
 }
 
 function save(notebook) {
-  notebooks.push(notebook);
+  if(notebook instanceof Notebook) {
+    notebooks.push(notebook);
+  } 
 }
 
 module.exports = notebookRepository.create({

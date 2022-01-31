@@ -1,5 +1,5 @@
 const DependencyError = require('../errors/DependencyError');
-const { UsecaseInputError } = require('../errors/UsecaseError');
+const { UsecaseInputError, UsecaseValidationError } = require('../errors/UsecaseError');
 const Note = require('../../../src/domain/entity/note');
 
 const add_note_usecase = {
@@ -17,6 +17,8 @@ const add_note_usecase = {
   execute: ({ title, content, notebook_id, user }) => {
     const id = this.IdGenerator();
     const note = new Note({ id: id, title, content, notebook_id, user });
+    if(!this.NotebookRepository.get(notebook_id)) throw new UsecaseValidationError(`Notebook: ${notebook_id} does not exists`);
+    this.NoteRepository.save(note);
     return {
       id: note.id,
       title,

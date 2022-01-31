@@ -4,4 +4,10 @@ class UsecaseInputError extends Error {
   }
 }
 
-module.exports = { UsecaseInputError }
+class UsecaseValidationError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+
+module.exports = { UsecaseInputError, UsecaseValidationError }
