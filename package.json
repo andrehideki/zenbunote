@@ -5,7 +5,8 @@
   "author": "andrehideki <andre.hkiw@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "usecase": "node project_cli.js"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
