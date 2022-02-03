@@ -12,14 +12,22 @@ if (!usecaseName) {
 const usecase_folder = 'src/domain/usecase';
 const usecase_test_folder = 'test/domain/usecase';
 
+const splitedUsecaseName = usecaseName.split('_');
+let camelCaseUsecaseName = '';
+splitedUsecaseName.forEach((value, index) => {
+  if (index) {
+    value = value.charAt(0).toUpperCase() + value.slice(1);
+  }
+  camelCaseUsecaseName += value;
+});
 const usecase_body = `
 const DependencyError = require('../errors/DependencyError');
 const { UsecaseInputError, UsecaseValidationError } = require('../errors/UsecaseError');
 
-const ${usecaseName}_usecase = {
+const ${camelCaseUsecaseName}Usecase = {
     
     create: ({ IdGenerator, NotebookRepository, NoteRepository }) => {
-      return ${usecaseName}_usecase.execute;
+      return ${camelCaseUsecaseName}Usecase.execute;
     },
 
     execute: ({ params }) => {
@@ -27,12 +35,12 @@ const ${usecaseName}_usecase = {
     }
   }
 
-module.exports = ${usecaseName}_usecase;
+module.exports = ${camelCaseUsecaseName}Usecase.execute;
 `;
 
 const usecase_test_body = `
 const crypto = require('crypto');
-const addNotebookUseCase = require('../../../src/domain/usecase/${usecaseName}');
+const ${camelCaseUsecaseName}Usecase = require('../../../src/domain/usecase/${camelCaseUsecaseName}Usecase');
 
 describe('When ...', () => {
   it('It should test', () => {
